@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+  <!-- Icon - IconMonster -->
+  <link rel="stylesheet" href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css" />
+  <!-- Mumble UI -->
+  <link rel="stylesheet" href="{% static 'uikit/styles/uikit.css' %}" />
+  <!-- Dev Search UI -->
+  <link rel="stylesheet" href="{% static 'styles/app.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ 
+  <title>ProjectHub - Connect with Developers!</title>
+</head>
+
+<body>
+
+      <!-- Header Section -->
+  <header class="header">
+    <div class="container container--narrow">
+      <a href="/" class="header__logo">
+        <h4>Project Hub</h4>
+      </a>
+      <nav class="header__nav">
+        <input type="checkbox" id="responsive-menu" />
+        <label for="responsive-menu" class="toggle-menu">
+          <span>Menu</span>
+          <div class="toggle-menu__lines"></div>
+        </label>
+        <ul class="header__menu">
+          <li class="header__menuItem"><a href="{% url 'Index' %}">Developers</a></li>
+          <li class="header__menuItem"><a href="{% url 'Projects' %}">Projects</a></li>
+          {% if request.user.username %}
+          <li class="header__menuItem"><a href="{% url 'Inbox' %}">Inbox</a></li>
+          <li class="header__menuItem"><a href="{% url 'My_account' %}">My Account</a></li>
+          
+            <li class="header__menuItem"><a href="{% url 'Singout' %}" class="btn btn--sub">Log Out</a></li>
+          {% else %}
+            <li class="header__menuItem"><a href="{% url 'Login' %}" class="btn btn--sub">Login/Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+{% if messages %}
+<div class="container" style="background-color: ; display: flex; justify-content: center;">
+{% for msg in messages %}
+
+  <div class="alert alert-{{msg.tags}}" role="alert" >
+    <center><p>{{msg}}</p></center>
+  </div>
+  {% endfor %}
+</div>
+  {% endif %}
+{% block content %}
+
+
+
+{% endblock %}
+
+</body>
+
+</html>

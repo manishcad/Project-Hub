@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <!-- Main Section -->
+    <main class="formPage my-xl">
+        <div class="content-box">
+            <div class="formWrapper">
+                <a class="backButton" href="{% url 'My_account' %}"><i class="fa-solid fa-backward"></i></a>
+                <br>
+
+                <form class="form" method="POST">
+                    {% csrf_token %}
+                    <!-- Input:Text -->
+                    <div class="form__field">
+                        <label for="formInput#text">Skill Name: </label>
+                        <input class="input input--text" id="formInput#text" type="text" name="name" required
+                           value="{{skill.skill_name}}" placeholder="Enter Skill Name"/>
+                    </div>
+
+                    <!-- Input:Text -->
+                    <div class="form__field">
+                        <label for="formInput#text">Skill Description: </label>
+                        <textarea class="input input--text" id="formInput#text" type="text" name="bio" required
+                            placeholder="Enter Skill Description" >{{skill.skill_bio}}</textarea>
+                    </div>
+
+                    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+
+    <!-- Main Section -->
+    <main class="formPage my-xl">
+        <div class="content-box">
+            <div class="formWrapper">
+                <h3>Enter new password</h3>
+
+                <p>Please enter your new password twice so we can verify you typed it in correctly.</p>
+
+                <br>
+
+                <form class="form" method="POST" style="background-color: ;">
+                    {% csrf_token %}
+                    <input type="password" placeholder="Enter Your New Password" class="form-control" name="password1" required>
+                    <input type="password" placeholder="Confirm Your New Password" class="form-control" name="password2" required>
+                   
+                    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+                </form>
+            </div>
+        </div>
+    </main>
+
+    {% endblock %}

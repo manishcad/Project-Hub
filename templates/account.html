@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Main Section -->
+  <main class="settingsPage profile my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <div class="card text-center">
+            <div class="card__body dev">
+              <a class="tag tag--pill tag--main settings__btn" href="{% url 'Account_edit' %}"><i class="im im-edit"></i> Edit</a>
+              <img class="avatar avatar--xl dev__avatar" src="{{ profile.avatar.url }}" />
+              <h2 class="dev__name">{{ profile.user.first_name }} </h2>
+              <p class="dev__title">{{ profile.summary }}</p>
+              <p class="dev__location">{{ profile.location }}</p>
+              <ul class="dev__social">
+                {% for link in user.link_set.all %}
+                    <li>
+                      <a title="{{ link.name }}" href="{{ link.link }}" target="_blank"><i class="{{ link.icon }}"></i></a>
+                    </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="column column--2of3">
+          <div class="devInfo">
+            <h3 class="devInfo__title">About Me</h3>
+            <p class="devInfo__about">
+                {{ profile.about }}
+            </p>
+          </div>
+          <div class="settings">
+            <h3 class="settings__title">Skills</h3>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'Add_skills' %}"><i class="im im-plus"></i> Add Skill</a>
+          </div>
+
+          <table class="settings__table">
+            {% for skill in skills %}
+            <tr>
+              <td class="settings__tableInfo">
+                <h4>{{ skill.skill_name }}</h4>
+                <p>
+                    {{ skill.skill_bio }}
+                </p>
+              </td>
+              <td class="settings__tableActions">
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'Edit_skill' skill.id %}"><i class="im im-edit"></i> Edit</a>
+                <a class="tag tag--pill tag--main settings__btn" href="{% url 'Delete_skill' skill.id %}"><i class="im im-x-mark-circle-o"></i>
+                  Delete</a>
+              </td>
+              {% endfor %}
+          </table>
+
+          <div class="settings">
+            <h3 class="settings__title">Projects</h3>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'Add_project' %}"><i class="im im-plus"></i> Add Project</a>
+          </div>
+
+          <table class="settings__table">
+              {% for project in all_projects %}
+                <tr>
+                  <td class="settings__thumbnail">
+                    <a href=""><img src="{{ project.image.url }}" alt="Project Thumbnail" /></a>
+                  </td>
+                  <td class="settings__tableInfo">
+                    <a href="{% url 'Single_project' project.id %}">{{ project.name }}</a>
+                    <p>
+                        {{ project.about }}
+                    </p>
+                  </td>
+                  <td class="settings__tableActions">
+                    <a class="tag tag--pill tag--main settings__btn" href="{% url 'Edit_project' project.id %}"><i class="im im-edit"></i> Edit</a>
+                    <a class="tag tag--pill tag--main settings__btn" href="{% url 'Delete_project' project.id %}"><i class="im im-x-mark-circle-o"></i>
+                      Delete</a>
+                  </td>
+                </tr>
+              {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

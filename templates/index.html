@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Main Section -->
+  <main class="home">
+    <section class="hero-section text-center">
+      <div class="container container--narrow">
+        <div class="hero-section__box">
+          <h2>Show Your Amazing <span>Projects</span></h2>
+          <h2>To THE WHOLE THE WORLD</h2>
+        </div>
+
+        <div class="hero-section__search">
+          <form class="form" method="post">
+            {% csrf_token %}
+            <div class="form__field">
+              <label for="formInput#search">Search Developers </label>
+              <input class="input input--text" id="formInput#search" type="text" name="search"
+                placeholder="Search by developer name" />
+            </div>
+
+            <input class="btn btn--sub btn--lg" type="submit" value="Search" />
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Search Result: DevList -->
+    <section class="devlist">
+      <div class="container">
+        <div class="grid grid--three">
+
+        {% for user in profiles %}
+          <div class="column card">
+            <div class="dev">
+              <a href="{% url 'Profile' user.user.username %}" class="card__body">
+                <div class="dev__profile">
+                  <img class="avatar avatar--md" src="{{ user.avatar.url }}" alt="image" />
+                  <div class="dev__meta">
+                    <h3>{{ user.user.first_name }} </h3>
+                    <h5>{{ user.summary }}</h5>
+                  </div>
+                </div>
+                <p class="dev__info">{{ user.about | slice:100 }}</p>
+                <div class="dev__skills">
+                    {% for skill in user.other_skills_set.all %}
+                      <span class="tag tag--pill tag--main">
+                        <small>{{ skill.name }}</small>
+                      </span>
+                    {% endfor %}
+                </div>
+              </a>
+            </div>
+          </div>
+          
+        {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <div class="pagination">
+      <ul class="container">
+      {% if profiles.has_previous %}
+        <li><a href="/?page={{profiles.previous_page_number}}" class="btn">&#10094; Prev</a></li>
+      {% else %}
+          <li><a class="btn btn--disabled">&#10094; Prev</a></li>
+      {% endif %}
+
+          {% for page in profiles.paginator.page_range %}
+            {% if users.number == page %}
+                <li><a href="{% url 'Index' %}?page={{ page }}" class="btn btn--sub">{{ page }}</a></li>
+            {% else %}
+                <li><a href="{% url 'Index' %}?page={{ page }}" class="btn">{{ page }}</a></li>
+            {% endif %}
+          {% endfor %}
+
+      {% if profiles.has_next %}
+        <li><a href="/?page={{profiles.next_page_number}}" class="btn">Next &#10095;</a></li>
+      {% else %}
+          <li><a class="btn btn--disabled">Next &#10095;</a></li>
+      {% endif %}
+      </ul>
+    </div>
+  </main>
+{% endblock %}

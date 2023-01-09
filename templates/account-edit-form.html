@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Main Section -->
+    <main class="formPage my-xl">
+        <div class="content-box">
+            <div class="formWrapper">
+                <a class="backButton" href="{% url 'My_account' %}"><i class="fa-solid fa-backward"></i></a>
+                <br>
+
+                <form class="form" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                   
+
+
+                    <!-- Input:Text -->
+                    <div class="form__field">
+                        <label for="formInput#text">Summary: </label>
+                        <input class="input input--text" id="formInput#text" type="text" name="summary" required
+                            value="{{ user.summary }}" />
+                    </div>
+
+                    <!-- Input:Text -->
+                    <div class="form__field">
+                        <label for="formInput#text">Location: </label>
+                        <input class="input input--text" id="formInput#text" type="text" name="location" required
+                            value="{{ user.location }}" />
+                    </div>
+
+                    <div class="form__field">
+                        <label for="formInput#text">About: </label>
+                        <textarea class="input input--text" id="formInput#text" type="text" name="about" required>{{ user.about }}</textarea>
+                    </div>
+
+                    <div class="form__field">
+                        <label for="formInput#text">Skills: </label>
+                        <input class="input input--text" id="formInput#text" type="text" name="skills" 
+                            value="{% for skill in user.other_skills %}{{ skill }}, {% endfor %}" />
+                    </div>
+
+                    <div class="form__field">
+                        <label for="formInput#text">Avatar: </label>
+                        <input class="input input--text" id="formInput#text" type="file" accept="image/*" name="avatar"/>
+                    </div>
+                    {% for msg in messages %}
+                        <p>{{ msg }}</p>
+                    {% endfor %}
+                    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+                </form>
+            </div>
+        </div>
+    </main>
+
+    {% endblock %}

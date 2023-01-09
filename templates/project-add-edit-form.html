@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Main Section -->
+    <main class="formPage my-xl">
+        <div class="content-box">
+            <div class="formWrapper">
+                <a class="backButton" href="{% url 'My_account' %}"><i class="fa-solid fa-backward"></i></a>
+                <br>
+
+                <form class="form" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Input:Text -->
+                    <div class="form__field">
+                        <label for="formInput#text">Project Title: </label>
+                        <input class="input input--text" id="formInput#text" type="text" name="title" required
+                           value="{{project.name}}" placeholder="Enter Your Project Title" />
+                    </div>
+
+                    <div class="form__field">
+                        <label for="formInput#text">Project Description: </label>
+                        <textarea placeholder="Enter Your Description" class="input input--text" id="formInput#text" type="text" name="description" required>{{project.about}}</textarea>
+                    </div>
+
+                    <div class="form__field">
+                        <label for="formInput#text">Source Code Link: </label>
+                        <input class="input input--text" id="formInput#text" type="text" name="link" required
+                           value="{{project.source_code}}" placeholder="Enter Your Project Link" />
+                    </div>
+
+                    
+
+                    <div class="form__field">
+                        <label for="formInput#text">Featured Image: </label>
+                        <input class="input input--text" id="formInput#text" type="file" accept="image/*" name="image" />
+                    </div>
+                    {% for msg in messages %}
+                        <p>{{ msg }}</p>
+                    {% endfor %}
+                    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}

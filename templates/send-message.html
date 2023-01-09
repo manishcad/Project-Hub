@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Main Section -->
+    <main class="formPage my-xl">
+        <div class="content-box">
+            <div class="formWrapper">
+                <a class="backButton" href=""><i class="im im-angle-left"></i></a>
+                <br>
+
+                <form class="form" method="POST">
+                    {% csrf_token %}
+                    <!-- Input:Text -->
+                    <div class="form__field">
+                        <label for="formInput#text">Message Subject Field: </label>
+                        <input class="input input--text" id="formInput#text" type="text" name="subject"
+                            placeholder="Enter message subject" />
+                    </div>
+
+                    <!-- Input:Text -->
+                    <div class="form__field">
+                        <label for="formInput#text">Message Text: </label>
+                        <textarea class="input input--text" id="formInput#text" type="text" name="text" placeholder="Enter message text" required></textarea>
+                    </div>
+
+                    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Send" />
+                </form>
+            </div>
+        </div>
+    </main>
+{% endblock %}
