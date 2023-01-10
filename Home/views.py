@@ -4,6 +4,7 @@ from Home.models import Project, Comment, Skill, New_msg, Like
 from .helper import Paginator_function
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.cache import cache
 # Create your views here.
 
 
@@ -13,7 +14,14 @@ def index(request):
     profiles = Paginator_function(profiles, 3, page)
     if request.method == "POST":
         search = request.POST.get("search")
-        profiles = Profile.objects.filter(user__first_name__istartswith=search)
+        if cache.get("search"):
+            profiles = cache.get("search")
+            print("From Cache")
+        else:
+            profiles = Profile.objects.filter(
+                user__first_name__istartswith=search)
+            cache.set("search", profiles, timeout=100)
+            print("From Database")
     context = {"profiles": profiles}
     return render(request, 'index.html', context)
 
