@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-@3od6v@_u=r_f3d6u82!#@v@30_!giuvd+^6j*sb^o__mkq0q6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*",'project-hub-production.up.railway.app']
+ALLOWED_HOSTS = ["*",'project-hub.up.railway.app']
 
 CSRF_TRUSTED_ORIGINS=['https://project-hub-production.up.railway.app']
 # Application definition
