@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'ProjectHub.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Project_Hub',
+        'NAME': 'railway',
         'USER': 'postgres',
         'PASSWORD': 'F3DXPrnO1V229qOBBEhI',
         'HOST': 'containers-us-west-178.railway.app',
