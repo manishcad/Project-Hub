@@ -14,14 +14,8 @@ def index(request):
     profiles = Paginator_function(profiles, 3, page)
     if request.method == "POST":
         search = request.POST.get("search")
-        if cache.get("search"):
-            profiles = cache.get("search")
-            print("From Cache")
-        else:
-            profiles = Profile.objects.filter(
-                user__first_name__istartswith=search)
-            cache.set("search", profiles, timeout=100)
-            print("From Database")
+        profiles = Profile.objects.filter(user__first_name__istartswith=search)
+            
     context = {"profiles": profiles}
     return render(request, 'index.html', context)
 
