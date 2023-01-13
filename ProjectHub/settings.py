@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@3od6v@_u=r_f3d6u82!#@v@30_!giuvd+^6j*sb^o__mkq0q6'
+SECRET_KEY = os.environ.get("Django_Secret_Key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,8 +85,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': 'F3DXPrnO1V229qOBBEhI',
-        'HOST': 'containers-us-west-178.railway.app',
+        'PASSWORD': os.environ.get("Database_Password"),
+        'HOST': os.environ.get("Database_Host"),
         'PORT': '5503',
     }
 }
@@ -156,8 +156,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Cloudnary Settings 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': "dgbe30e7f",
-    'API_KEY': "761954252784968",
-    'API_SECRET':"Tk86498ouwBdMrzVE5L9b6jrwD0"
+    'API_KEY': os.environ.get("Cloudinary_Api_Key"),
+    'API_SECRET':os.environ.get("Cloudinary_Api_Secret")
 }
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
@@ -169,4 +169,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'manishtochand@gmail.com'
-EMAIL_HOST_PASSWORD = 'psjxseegetyfqrlj'
+EMAIL_HOST_PASSWORD = os.environ.get("Email_Host_Password")
